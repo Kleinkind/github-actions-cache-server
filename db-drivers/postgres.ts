@@ -6,12 +6,12 @@ import { defineDatabaseDriver } from '~/lib/db/driver'
 
 export const postgresDriver = defineDatabaseDriver({
   envSchema: z.object({
-    DB_POSTGRES_CONNECTION_STRING: z.string().nullable(),
-    DB_POSTGRES_DATABASE: z.string().nullable(),
-    DB_POSTGRES_HOST: z.string().nullable(),
-    DB_POSTGRES_USER: z.string().nullable(),
-    DB_POSTGRES_PASSWORD: z.string().nullable(),
-    DB_POSTGRES_PORT: z.coerce.number().int().nullable(),
+    DB_POSTGRES_CONNECTION_STRING: z.string().optional(),
+    DB_POSTGRES_DATABASE: z.string().optional(),
+    DB_POSTGRES_HOST: z.string().optional(),
+    DB_POSTGRES_USER: z.string().optional(),
+    DB_POSTGRES_PASSWORD: z.string().optional(),
+    DB_POSTGRES_PORT: z.coerce.number().int().optional(),
   }),
   async setup({
     DB_POSTGRES_CONNECTION_STRING,

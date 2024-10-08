@@ -6,7 +6,7 @@ import { defineDatabaseDriver } from '~/lib/db/driver'
 
 export const postgresDriver = defineDatabaseDriver({
   envSchema: z.object({
-    DB_POSTGRES_SSL: z.boolean(),
+    DB_POSTGRES_SSL: z.enum(['true', 'false']).transform((v) => v === 'true'),
     DB_POSTGRES_DATABASE: z.string(),
     DB_POSTGRES_HOST: z.string(),
     DB_POSTGRES_USER: z.string(),

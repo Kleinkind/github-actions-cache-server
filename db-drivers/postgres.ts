@@ -6,7 +6,7 @@ import { defineDatabaseDriver } from '~/lib/db/driver'
 
 export const postgresDriver = defineDatabaseDriver({
   envSchema: z.object({
-    DB_POSTGRES_CONNECTION_STRING: z.string(),
+    DB_POSTGRES_SSL: z.boolean(),
     DB_POSTGRES_DATABASE: z.string(),
     DB_POSTGRES_HOST: z.string(),
     DB_POSTGRES_USER: z.string(),
@@ -14,7 +14,7 @@ export const postgresDriver = defineDatabaseDriver({
     DB_POSTGRES_PORT: z.coerce.number().int(),
   }),
   async setup({
-    DB_POSTGRES_CONNECTION_STRING,
+    DB_POSTGRES_SSL,
     DB_POSTGRES_DATABASE,
     DB_POSTGRES_HOST,
     DB_POSTGRES_PASSWORD,
@@ -22,12 +22,12 @@ export const postgresDriver = defineDatabaseDriver({
     DB_POSTGRES_USER,
   }) {
     const pool = new pg.Pool({
-      connectionString: DB_POSTGRES_CONNECTION_STRING,
       database: DB_POSTGRES_DATABASE,
       host: DB_POSTGRES_HOST,
       password: DB_POSTGRES_PASSWORD,
       port: DB_POSTGRES_PORT,
       user: DB_POSTGRES_USER,
+      ssl: DB_POSTGRES_SSL,
       max: 10,
     })
     await pool.connect()
